@@ -12,11 +12,11 @@ class ProjectsController < ApplicationController
   def edit; end
 
   def create
-    @project = current_user.created_projects.create(project_params)
+    @project = Project.new(project_params.merge(creator_id: current_user.id))
 
-    if @project
+    if @project.save
       flash[:success] = 'Project created successfully...'
-      redirect_to project_path(@project)
+      redirect_to projects_path
     else
       flash.now[:alert] = 'Project not created successfully...'
       render 'new'
@@ -28,7 +28,9 @@ class ProjectsController < ApplicationController
   end
 
   def update
-    if @project.update(project_params)
+    @project.assign_attributes(project_params)
+    maintain_history("Project", @project) unless @project.changes.empty?
+    if @project.save
       flash[:success] = 'Category updated successfully...'
       redirect_to projects_path
     else
@@ -39,6 +41,7 @@ class ProjectsController < ApplicationController
 
   def destroy
     if @project.destroy
+      delete_history("Project", @project)
       flash[:alert] = 'Category deleted successfully...'
     else
       flash[:notice] = 'Category not deleted successfully...'

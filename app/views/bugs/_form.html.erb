@@ -1,0 +1,27 @@
+<div class="mx-3">
+  <%= form_with(model: @bug) do |f| %>
+    <div class="mb-3">
+      <%= f.label :title, class: 'form-label' %><br>
+      <%= f.text_field :title, class: 'form-control', :required => true %>
+    </div>
+
+    <div class="mb-3">
+      <%= f.label :description, class: 'form-label' %><br>
+      <%= f.text_area :description, class: 'form-control', :required => true %>
+    </div>
+
+    <div class="mb-3">
+      <%= f.label :deadline, class: 'form-label' %><br>
+      <%= f.date_field :deadline, class: 'form-control' %>
+    </div>
+
+    <div class="mb-3">
+      <%= f.label :nature, "Feature", value: "feature", class: 'form-label' %>
+      <%= f.radio_button :nature, "feature" %><br />
+      <%= f.label :nature, "Bug", value: "bug", class: 'form-label' %>
+      <%= f.radio_button :nature, "bug", checked: true %>
+    </div>
+
+    <%= f.submit class: 'btn btn-primary' %>
+  <% end %>
+</div>

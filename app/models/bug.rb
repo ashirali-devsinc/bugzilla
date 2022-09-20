@@ -1,7 +1,9 @@
 class Bug < ApplicationRecord
 
   belongs_to :user
-  belongs_to :project
+
+  has_many :project_bugs, dependent: :destroy
+  has_many :infected_projects, through: :project_bugs, :source => :project
 
   enum nature: {
     bug: 0,
