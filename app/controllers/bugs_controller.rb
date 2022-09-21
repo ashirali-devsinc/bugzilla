@@ -1,5 +1,5 @@
 class BugsController < ApplicationController
-  before_action :find_bug, only: %i[edit update destroy]
+  before_action :find_bug, only: %i[edit update destroy show]
   
   def index
     @bugs = Bug.all
@@ -23,9 +23,7 @@ class BugsController < ApplicationController
     end
   end
 
-  def show
-    find_bug
-  end
+  def show; end
 
   def update
     @bug.assign_attributes(bug_params)
