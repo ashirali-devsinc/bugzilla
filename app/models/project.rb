@@ -8,6 +8,7 @@ class Project < ApplicationRecord
   has_many :project_qas, dependent: :destroy
   has_many :qas, through: :project_qas, :source => :user
 
-  has_many :bugs, dependent: :destroy
+  has_many :project_bugs, dependent: :destroy
+  has_many :bugs, through: :project_bugs
 
 end
