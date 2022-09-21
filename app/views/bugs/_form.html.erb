@@ -19,7 +19,7 @@
       <%= f.label :nature, "Feature", value: "feature", class: 'form-label' %>
       <%= f.radio_button :nature, "feature" %><br />
       <%= f.label :nature, "Bug", value: "bug", class: 'form-label' %>
-      <%= f.radio_button :nature, "bug", checked: true %>
+      <%= page == "new" ? (f.radio_button :nature, "bug", checked: true) : (f.radio_button :nature, "bug") %>
     </div>
 
     <%= f.submit class: 'btn btn-primary' %>
