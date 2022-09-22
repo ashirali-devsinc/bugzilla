@@ -1,6 +1,19 @@
-<h1 class="text-center"><%= @bug.title %></h1>
-<p class="text-center"><%= @bug.description %></p>
-<p class="text-center"><%= @bug.deadline %></p>
-<p class="text-center"><%= @bug.nature %></p>
-<p class="text-center"><%= @bug.status %></p>
-<p class="text-center"><%= @bug.created_at %></p>
+<div class="text-center row">
+<div class="col"></div>
+<div class="col"></div>
+  <div class="col">
+    <div class="card">
+      <%= SS(@bug) %>
+      <div class="card-body">
+        <h5 class="card-title"><%= @bug.title %></h5>
+        <p class="card-text"><%= @bug.description %></p>
+        <p class="card-text"><%= @bug.deadline %></p>
+        <p class="card-text"><%= @bug.nature %></p>
+        <p class="card-text"><%= @bug.status %></p>
+        <p class="card-text"><%= @bug.created_at %></p>
+      </div>
+    </div>
+  </div>
+<div class="col"></div>
+<div class="col"></div>
+</div>

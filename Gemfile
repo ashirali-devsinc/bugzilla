@@ -17,7 +17,7 @@ gem 'devise'
 gem 'byebug'
 gem 'bootstrap', '~> 5.1.3'
 gem 'sass-rails'
-gem "audited", "~> 5.0"
+gem "image_processing", ">= 1.2"
 
 group :development, :test do
   gem "debug", platforms: %i[ mri mingw x64_mingw ]

@@ -16,6 +16,11 @@
     </div>
 
     <div class="mb-3">
+      <%= f.label :screenshot, class: 'form-label' %><br>
+      <%= f.file_field :screenshot, class: 'form-control', accept:'image/png,image/gif' %>
+    </div>
+
+    <div class="mb-3">
       <%= f.label :nature, "Feature", value: "feature", class: 'form-label' %>
       <%= f.radio_button :nature, "feature" %><br />
       <%= f.label :nature, "Bug", value: "bug", class: 'form-label' %>
