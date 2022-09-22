@@ -11,4 +11,6 @@ class Project < ApplicationRecord
   has_many :project_bugs, dependent: :destroy
   has_many :bugs, through: :project_bugs
 
+  validates :title, :description, presence: true
+
 end
