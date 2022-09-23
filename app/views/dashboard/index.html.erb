@@ -1,3 +1,5 @@
-<%= form_with url: new_project_path, method: :get do |form| %>
-  <%= form.submit "Create Project", class: "btn btn-outline-success bt-lg" %>
+<% if current_user.manager? %>
+  <%= render partial: 'manager_dashboard' %>
+<% elsif current_user.developer? %>
+<% else %>
 <% end %>

@@ -18,6 +18,7 @@ gem 'byebug'
 gem 'bootstrap', '~> 5.1.3'
 gem 'sass-rails'
 gem "image_processing", ">= 1.2"
+gem 'jquery-rails'
 
 group :development, :test do
   gem "debug", platforms: %i[ mri mingw x64_mingw ]

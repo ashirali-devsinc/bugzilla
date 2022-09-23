@@ -14,9 +14,13 @@
       <td><%= obj.title %></td>
       <td><%= obj.description %></td>
       <td>
-        <%= link_to 'Show', (model == "Project" ? project_path(obj) : bug_path(obj)), class: 'btn btn-info' %> | 
-        <%= link_to 'Edit', (model == "Project" ? edit_project_path(obj) : edit_bug_path(obj)), class: 'btn btn-warning' %> | 
-        <%= button_to 'Delete', (model == "Project" ? project_path(obj) : bug_path(obj)), method: :delete, class: 'btn btn-danger', form: {style: 'display:inline-block;'} %>
+        <% if params[:assign].present? %>
+          <%= link_to 'Assign '+params[:assign], (params[:assign] == "Developers" ? developers_list_project_path(obj) : QAs_list_project_path(obj)), class: 'btn btn-success' %>
+        <% elsif %>
+          <%= link_to 'Show', (model == "Project" ? project_path(obj) : bug_path(obj)), class: 'btn btn-info' %> | 
+          <%= link_to 'Edit', (model == "Project" ? edit_project_path(obj) : edit_bug_path(obj)), class: 'btn btn-warning' %> | 
+          <%= button_to 'Delete', (model == "Project" ? project_path(obj) : bug_path(obj)), method: :delete, class: 'btn btn-danger', form: {style: 'display:inline-block;'} %>
+        <% end %>
       </td>
     </tr>
   <% end %>
