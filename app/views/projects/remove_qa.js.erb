@@ -1,0 +1,5 @@
+$( '#remove-<%= @user_id %>' ).removeClass('btn-danger');
+$( '#remove-<%= @user_id %>' ).addClass('btn-warning');
+$( '#remove-<%= @user_id %>' ).text("Assign"); 
+$( '#remove-<%= @user_id %>' ).attr("href", ($( '#remove-<%= @user_id %>' ).attr("href").replace("remove", "assign")));
+$( '#remove-<%= @user_id %>' ).prop("id", 'assign-<%= @user_id %>');
