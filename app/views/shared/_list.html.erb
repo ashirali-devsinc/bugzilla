@@ -15,7 +15,7 @@
         <div id="div-<%= user.id %>">
           <%= already_assigned(params[:id], user.id, list_of) ? 
           (link_to 'Remove', (list_of == "dev" ? remove_dev_project_path(user_id: user.id) : remove_qa_project_path(user_id: user.id)), method: :get, class: 'btn btn-danger', id: "remove-#{user.id}", remote: true) : 
-          (link_to 'Assign', (list_of == "dev" ? assign_dev_project_path(user_id: user.id) : assign_qa_project_path(user_id: user.id)), method: :get, class: 'btn btn-info', id: "assign-#{user.id}", remote: true) %>
+          (link_to 'Assign', (list_of == "dev" ? assign_dev_project_path(user_id: user.id) : assign_qa_project_path(user_id: user.id)), method: :get, class: 'btn btn-warning', id: "assign-#{user.id}", remote: true) %>
         </div>
         </td>
       </tr>
