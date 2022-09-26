@@ -16,7 +16,11 @@
       <td>
         <% if params[:assign].present? %>
           <%= link_to 'Assign '+params[:assign], (params[:assign] == "Developers" ? developers_list_project_path(obj) : QAs_list_project_path(obj)), class: 'btn btn-success' %>
-        <% elsif %>
+        <% elsif params[:bug].present? %>
+          <%= obj.qas.include?(current_user) ? (link_to 'Assign Bug', bugs_path(project_id:obj.id, assign_bug:true), class: 'btn btn-info') : 'You have no access to this project' %>
+        <% elsif params[:assign_bug].present? %>
+          <%= bug_exist(params[:project_id], obj) %>
+        <% else %>
           <%= link_to 'Show', (model == "Project" ? project_path(obj) : bug_path(obj)), class: 'btn btn-info' %> | 
           <%= link_to 'Edit', (model == "Project" ? edit_project_path(obj) : edit_bug_path(obj)), class: 'btn btn-warning' %> | 
           <%= button_to 'Delete', (model == "Project" ? project_path(obj) : bug_path(obj)), method: :delete, class: 'btn btn-danger', form: {style: 'display:inline-block;'} %>
