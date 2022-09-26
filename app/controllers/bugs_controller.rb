@@ -1,5 +1,5 @@
 class BugsController < ApplicationController
-  before_action :find_bug, only: %i[edit update destroy show]
+  before_action :find_bug, only: %i[edit update destroy show assign remove]
   
   def index
     @bugs = Bug.all
@@ -45,6 +45,24 @@ class BugsController < ApplicationController
       flash[:notice] = 'Bug not deleted successfully...'
     end
     redirect_to bugs_path
+  end
+
+  def assign
+    assign_bug = ProjectBug.new(bug_id: params[:id], project_id: params[:project_id])
+    if assign_bug.save
+      flash[:success] = 'Bug assigned successfully...'
+    else
+      flash[:alert] = 'Bug not assigned successfully...'
+    end
+  end
+
+  def remove
+    remove_bug = ProjectBug.find_by(bug_id: params[:id], project_id: params[:project_id])
+    if remove_bug.destroy
+      flash[:alert] = 'Bug removed successfully...'
+    else
+      flash[:notice] = 'Bug not removed successfully...'
+    end
   end
 
   private

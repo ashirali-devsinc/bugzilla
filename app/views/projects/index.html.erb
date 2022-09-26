@@ -1,5 +1,5 @@
 <h2 class="text-center">Profiles</h2>
 <%= render partial: "shared/index", locals: { obj: @projects, model: "Project" } %>
 <div class="d-grid">
-    <%= (link_to 'Create New Project', new_project_path, method: :get, class: 'btn btn-outline-primary btn-block mx-5 mb-2') unless params[:assign].present? %>
+    <%= (link_to 'Create New Project', new_project_path, method: :get, class: 'btn btn-outline-primary btn-block mx-5 mb-2') unless (params[:assign].present? || params[:bug].present?) %>
 </div>

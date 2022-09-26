@@ -15,6 +15,12 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :bugs
+  resources :bugs do
+    member do
+      get :assign
+      get :remove
+    end
+  end
+
   root 'dashboard#index'
 end
