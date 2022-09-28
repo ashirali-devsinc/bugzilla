@@ -1,6 +1,6 @@
 class BugsController < ApplicationController
-  before_action :authorize_project_class, only: %i[index new edit create update destroy remove assign change_status]
-  before_action :find_bug, only: %i[edit update destroy show assign remove assign_bug_to_developer remove_bug_from_developer]
+  before_action :authorize_project_class, except: %i[show project_bug_list work_progress]
+  before_action :find_bug, only: %i[edit update destroy show assign remove]
   
   def index
     @bugs = Bug.all
@@ -68,24 +68,6 @@ class BugsController < ApplicationController
 
   def project_bug_list
     render inline: '<%= render partial: "shared/index", locals: { obj: Project.find(params[:project]).bugs, model: ""} %>', layout: 'layouts/application'
-  end
-
-  def assign_bug_to_developer
-    assign_bug_to_developer = Workload.new(bug_id: params[:id], user_id: current_user.id, project_id: params[:project_id])
-    if assign_bug_to_developer.save
-      flash[:success] = 'Bug assigned successfully...'
-    else
-      flash[:alert] = 'Bug not assigned successfully...'
-    end
-  end
-
-  def remove_bug_from_developer
-    remove_bug_from_developer = Workload.find_by(bug_id: params[:id], user_id: current_user.id, project_id: params[:project_id])
-    if remove_bug_from_developer.destroy
-      flash[:alert] = 'Bug removed successfully...'
-    else
-      flash[:notice] = 'Bug not removed successfully...'
-    end
   end
 
   def work_progress
