@@ -20,7 +20,22 @@ Rails.application.routes.draw do
       get :assign
       get :remove
     end
+
+    collection do
+      get :project_bug_list
+      get :work_progress
+    end
   end
+
+  resources :dashboard, only: [:index] do
+    collection do
+      get :developer
+    end
+  end
+
+  patch "/assign_bug_to_developer", to: "workloads#assign_bug_to_dev"
+  patch "/remove_bug_from_developer", to: "workloads#remove_bug_from_dev"
+  patch "/change_status", to: "workloads#change_status"
 
   root 'dashboard#index'
 end

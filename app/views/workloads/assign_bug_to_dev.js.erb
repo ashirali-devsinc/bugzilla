@@ -1,0 +1,5 @@
+$( '#assign-bug-<%= params[:bug_id] %>' ).removeClass('btn-dark');
+$( '#assign-bug-<%= params[:bug_id] %>' ).addClass('btn-danger');
+$( '#assign-bug-<%= params[:bug_id] %>' ).text("Remove"); 
+$( '#assign-bug-<%= params[:bug_id] %>' ).attr("href", ($( '#assign-bug-<%= params[:bug_id] %>' ).attr("href").replace("assign_bug_to_developer", "remove_bug_from_developer")));
+$( '#assign-bug-<%= params[:bug_id] %>' ).prop("id", 'remove-bug-<%= params[:bug_id] %>');

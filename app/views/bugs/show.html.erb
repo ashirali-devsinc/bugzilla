@@ -9,8 +9,17 @@
         <p class="card-text"><%= @bug.description %></p>
         <p class="card-text"><%= @bug.deadline %></p>
         <p class="card-text"><%= @bug.nature %></p>
-        <p class="card-text"><%= @bug.status %></p>
         <p class="card-text"><%= @bug.created_at %></p>
+        <% if params[:project_id].present? %>
+          <hr/>
+          <div>
+            <b>Model Name</b>: <%= project(params[:project_id]).title %><br/>
+            <b>Status</b>:
+            <%= form_with(url: change_status_path(bug_id: @bug.id, project_id: params[:project_id]), method: :patch, local: false) do |f| %>
+              <%= f.select :status, ['generated', 'started', 'resolved', 'completed'], {selected: selected_value(params[:project_id], params[:id])}, {:onchange=> "this.form.submit();"} %>
+            <% end %>
+          </div>
+        <% end %>
       </div>
     </div>
   </div>

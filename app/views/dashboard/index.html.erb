@@ -1,6 +1,7 @@
 <% if current_user.manager? %>
   <%= render partial: 'manager_dashboard' %>
 <% elsif current_user.developer? %>
+  <%= render partial: 'dev_dashboard' %>
 <% else %>
   <%= render partial: 'qa_dashboard' %>
 <% end %>

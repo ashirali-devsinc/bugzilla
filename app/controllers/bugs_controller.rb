@@ -1,4 +1,5 @@
 class BugsController < ApplicationController
+  before_action :authorize_project_class, except: %i[show project_bug_list work_progress]
   before_action :find_bug, only: %i[edit update destroy show assign remove]
   
   def index
@@ -65,6 +66,15 @@ class BugsController < ApplicationController
     end
   end
 
+  def project_bug_list
+    render inline: '<%= render partial: "shared/index", locals: { obj: Project.find(params[:project]).bugs, model: ""} %>', layout: 'layouts/application'
+  end
+
+  def work_progress
+    @project_ids = current_user.workload.pluck("project_id")
+    render inline: '<%= render partial: "shared/index", locals: { obj: current_user.under_develop_bugs, model: "work_progress", project_id_array: @project_ids} %>', layout: 'layouts/application'
+  end
+
   private
 
   def bug_params
@@ -73,5 +83,9 @@ class BugsController < ApplicationController
 
   def find_bug
     @bug = Bug.find(params[:id])
+  end
+
+  def authorize_project_class
+    authorize Bug
   end
 end
