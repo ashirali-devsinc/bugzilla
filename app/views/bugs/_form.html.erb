@@ -1,5 +1,7 @@
 <div class="mx-3">
   <%= form_with(model: @bug) do |f| %>
+    <%= render partial: "shared/form_error", locals: { obj:@bug, object:'Bug' } %>
+
     <div class="mb-3">
       <%= f.label :title, class: 'form-label' %><br>
       <%= f.text_field :title, class: 'form-control', :required => true %>

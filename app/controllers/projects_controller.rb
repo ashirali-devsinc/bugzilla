@@ -1,4 +1,5 @@
 class ProjectsController < ApplicationController
+  before_action :authorize_project_class, only: %i[index new edit create update destroy assign_dev assign_qa remove_dev remove_qa]
   before_action :find_project, only: %i[edit update destroy]
   before_action :required_ids, only: %i[assign_dev assign_qa remove_dev remove_qa]
   
@@ -107,5 +108,9 @@ class ProjectsController < ApplicationController
   def required_ids
     @user_id = params[:user_id]
     @project_id = params[:id]
+  end
+
+  def authorize_project_class
+    authorize Project
   end
 end

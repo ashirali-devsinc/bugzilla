@@ -19,6 +19,20 @@ Rails.application.routes.draw do
     member do
       get :assign
       get :remove
+      get :assign_bug_to_developer
+      get :remove_bug_from_developer
+      patch :change_status
+    end
+
+    collection do
+      get :project_bug_list
+      get :work_progress
+    end
+  end
+
+  resources :dashboard, only: [:index] do
+    collection do
+      get :developer
     end
   end
 

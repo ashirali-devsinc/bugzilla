@@ -2,7 +2,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  after_create :enroll_in_state_machine, :if => Proc.new{ self.developer? }
+  after_create :enroll_in_state_machine
 
   has_many :created_projects, :class_name => "Project", :foreign_key => "creator_id"
   has_many :changes_made, :class_name => "ManualStateMachine"
@@ -15,6 +15,9 @@ class User < ApplicationRecord
 
   has_many :bugs, dependent: :destroy
 
+  has_many :workload, dependent: :destroy
+  has_many :under_develop_bugs, through: :workload, :source => :bug
+
   enum user_type: {
     manager: 0,
     developer: 1,
@@ -24,7 +27,7 @@ class User < ApplicationRecord
   private
 
   def enroll_in_state_machine
-    ManualStateMachine.create(user_id: self.id, model: "Bug", changes_made: [])
-    ManualStateMachine.create(user_id: self.id, model: "Project", changes_made: [])
+    ManualStateMachine.create(user_id: self.id, model: "Bug", changes_made: []) if self.QA?
+    ManualStateMachine.create(user_id: self.id, model: "Project", changes_made: []) if self.manager?
   end
 end
