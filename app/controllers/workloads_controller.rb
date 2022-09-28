@@ -1,4 +1,6 @@
 class WorkloadsController < ApplicationController
+  before_action :authorize_workload_class
+
   def assign_bug_to_dev
     assign_bug_to_developer = Workload.new(bug_id: params[:bug_id], user_id: current_user.id, project_id: params[:project_id])
     if assign_bug_to_developer.save
@@ -15,5 +17,15 @@ class WorkloadsController < ApplicationController
     else
       flash[:notice] = 'Bug not removed successfully...'
     end
+  end
+
+  def change_status
+    Workload.find_by(user_id: current_user.id, bug_id: params[:bug_id], project_id: params[:project_id]).send(params[:status] + "!")
+  end
+
+  private
+
+  def authorize_workload_class
+    authorize Workload
   end
 end

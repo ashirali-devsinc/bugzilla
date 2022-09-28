@@ -19,7 +19,6 @@ Rails.application.routes.draw do
     member do
       get :assign
       get :remove
-      patch :change_status
     end
 
     collection do
@@ -36,6 +35,7 @@ Rails.application.routes.draw do
 
   patch "/assign_bug_to_developer", to: "workloads#assign_bug_to_dev"
   patch "/remove_bug_from_developer", to: "workloads#remove_bug_from_dev"
+  patch "/change_status", to: "workloads#change_status"
 
   root 'dashboard#index'
 end

@@ -11,7 +11,4 @@ class BugPolicy < ApplicationPolicy
   alias destroy? QA?
   alias remove? QA?
   alias assign? QA?
-  def change_status?
-    user.developer?
-  end
 end

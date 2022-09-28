@@ -15,7 +15,7 @@
           <div>
             <b>Model Name</b>: <%= project(params[:project_id]).title %><br/>
             <b>Status</b>:
-            <%= form_with(url: change_status_bug_path(@bug, project_id: params[:project_id]), method: :patch, local: false) do |f| %>
+            <%= form_with(url: change_status_path(bug_id: @bug.id, project_id: params[:project_id]), method: :patch, local: false) do |f| %>
               <%= f.select :status, ['generated', 'started', 'resolved', 'completed'], {selected: selected_value(params[:project_id], params[:id])}, {:onchange=> "this.form.submit();"} %>
             <% end %>
           </div>

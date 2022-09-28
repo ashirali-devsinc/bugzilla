@@ -75,10 +75,6 @@ class BugsController < ApplicationController
     render inline: '<%= render partial: "shared/index", locals: { obj: current_user.under_develop_bugs, model: "work_progress", project_id_array: @project_ids} %>', layout: 'layouts/application'
   end
 
-  def change_status
-    Workload.find_by(user_id: current_user.id, bug_id: params[:id], project_id: params[:project_id]).send(params[:status] + "!")
-  end
-
   private
 
   def bug_params
